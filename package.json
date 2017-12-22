@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "A simple and fast tiny vdom tool",
   "keywords": [
-    "tvdom", "vdom", "virtual dom"
+    "tvdom", "vdom", "virtual dom", "tiny virtual dom", "tiny vdom"
   ],
   "repository": {
     "type": "git",
