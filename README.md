@@ -1,2 +1,2 @@
-# tiny-vdom
-A small and fast tiny vdom tool
+# tvdom
+A simple and fast tiny vdom tool
