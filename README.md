@@ -2,7 +2,7 @@
 A simple and fast tiny vdom tool
 
 
-## sample
+## Sample
 ```js
     var tpl = template(new Date());
     var container = document.getElementById('container');
@@ -24,6 +24,6 @@ A simple and fast tiny vdom tool
 ```
 
 
-## how to build
+## How to build
 > npm run build 
 
