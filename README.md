@@ -1,5 +1,5 @@
 # tvdom
-A simple and fast tiny vdom tool
+tvdom is a simple and fast tiny vdom tool that support parse html, diff vtree and patch to dom functions.
 
 
 ## Sample
@@ -27,3 +27,8 @@ A simple and fast tiny vdom tool
 ## How to build
 > npm run build 
 
+
+## Note
+The tvdom build on the shoulder of the follwing repositories, thanks the contributors who build so simple and good tools.
+- https://github.com/livoras/simple-virtual-dom
+- https://github.com/HenrikJoreteg/html-parse-stringify
