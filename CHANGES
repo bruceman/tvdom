@@ -1,4 +1,5 @@
-0.1.1
+0.1.2
 ======
-1. fix some issues
+1. change parse error message
+2. add parse test
 
