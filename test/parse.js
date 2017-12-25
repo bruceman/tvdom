@@ -1,4 +1,3 @@
-/* global console */
 var test = require('tape');
 var tvdom = require('../dist/tvdom.common');
 
