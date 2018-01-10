@@ -222,3 +222,48 @@ test('simple speed sanity check', function(t) {
 
     t.end();
 });
+
+test('text unescape test', function(t) {
+    var html = '<div>tom&amp;jerry</div>';
+    var parsed = tvdom.parse(html);
+    t.deepEqual(parsed, {
+        tagName: 'div',
+        props: {},
+        children: ['tom&jerry'],
+        key: undefined,
+        count: 1,
+    });
+
+    html = '<div>tom&amp;jerry&amp;bruce</div>';
+    parsed = tvdom.parse(html);
+    t.deepEqual(parsed, {
+        tagName: 'div',
+        props: {},
+        children: ['tom&jerry&bruce'],
+        key: undefined,
+        count: 1,
+    });
+
+    html = '<div>a&amp;b&lt;c&gt;d&quot;1&#x27;2&#x60;3&#x3D;4</div>';
+    parsed = tvdom.parse(html);
+    t.deepEqual(parsed, {
+        tagName: 'div',
+        props: {},
+        children: ['a&b<c>d"1\'2`3=4'],
+        key: undefined,
+        count: 1,
+    });
+
+     html = '<div>a&amp;b&nbsp;c</div>';
+    parsed = tvdom.parse(html);
+    t.deepEqual(parsed, {
+        tagName: 'div',
+        props: {},
+        children: ['a&b&nbsp;c'],
+        key: undefined,
+        count: 1,
+    });
+
+    t.end();
+});
+

@@ -1,3 +1,7 @@
+0.1.3
+=====
+unescape special chars in text node (include handlebars escaped chars)
+
 0.1.2
 ======
 1. change parse error message
