@@ -21,13 +21,13 @@ test('parse tests', function(t) {
         count: 1,
     });
 
-    html = ' <div class="oh"><p>hi</p></div> ';
+    html = ' <div title="oh&quot;i&#x27;m &lt;bruce&gt;. 1&#x3D;1"><p>hi</p></div> ';
     parsed = tvdom.parse(html);
 
     t.deepEqual(parsed, {
         tagName: 'div',
         props: {
-            class: 'oh'
+            title: 'oh"i\'m <bruce>. 1=1'
         },
         children: [{
             tagName: 'p',
