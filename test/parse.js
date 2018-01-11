@@ -254,7 +254,7 @@ test('text unescape test', function(t) {
         count: 1,
     });
 
-     html = '<div>a&amp;b&nbsp;c</div>';
+    html = '<div>a&amp;b&nbsp;c</div>';
     parsed = tvdom.parse(html);
     t.deepEqual(parsed, {
         tagName: 'div',
@@ -262,6 +262,25 @@ test('text unescape test', function(t) {
         children: ['a&b&nbsp;c'],
         key: undefined,
         count: 1,
+    });
+
+    html = '<div><em>name:</em>bruce&quot;man</div>';
+    parsed = tvdom.parse(html);
+    t.deepEqual(parsed, {
+        tagName: 'div',
+        props: {},
+        children: [
+             {
+                tagName: 'em',
+                props: {},
+                children: ['name:'],
+                key: undefined,
+                count: 1
+            },
+            'bruce"man'
+        ],
+        key: undefined,
+        count: 3,
     });
 
     t.end();
