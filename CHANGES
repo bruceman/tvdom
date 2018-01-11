@@ -1,3 +1,7 @@
+0.1.5
+=====
+try fix npm not found previous version issue
+
 0.1.4
 =====
 unescape special chars in attribute value (include handlebars escaped chars)

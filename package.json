@@ -1,6 +1,6 @@
 {
   "name": "tvdom",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A simple and fast tiny vdom tool",
   "keywords": [
     "tvdom",
