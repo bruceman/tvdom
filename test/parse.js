@@ -286,3 +286,139 @@ test('text unescape test', function(t) {
     t.end();
 });
 
+test('simple speed sanity check', function(t) {
+    var i = 100000;
+    var groupSize = 1000;
+    var waitLoopSize = 10000000;
+    var groups = i / groupSize;
+    var html = '<html><head><title>Some page</title></head><body class="hey there"><img src="someURL"><h3>Hey, we need content</h3><br></body></html>';
+
+    var parse = tvdom.parse;
+    var times = [];
+    var count;
+    var waitCount;
+    var total = 0;
+    var start, stepAverage;
+
+    console.log('running ' + i + ' iterations...');
+
+    while (i--) {
+        count = groupSize;
+        // grab groups
+        if (i % count === 0) {
+            start = Date.now();
+            while (count--) {
+                parse(html);
+            }
+            var diff = Date.now() - start;
+            stepAverage = diff / groupSize;
+            console.log('group ' + (groups - (i / groupSize)) + ': ' + stepAverage);
+            times.push(stepAverage);
+            total += stepAverage;
+            waitCount = waitLoopSize;
+            // forcing a bit of a pause between tests
+            while (waitCount--) {}
+        }
+
+    }
+
+    // trim off first
+    // it's always a slower outlier
+    // with higher variability that
+    // makes it harder to find differences
+    times.shift();
+
+    var max = Math.max.apply(null, times);
+    var min = Math.min.apply(null, times);
+    var average = total / times.length;
+
+    console.log('max', max);
+    console.log('min', min);
+    console.log('avg', average);
+
+    t.comment('average parse time: ' + average);
+
+    t.end();
+});
+
+test('test nested string attributes', function(t) {
+    var html = '<img src="a.jpg" onerror="this.src=\'b.jpg\'">';
+    var parsed = tvdom.parse(html);
+    console.log(parsed)
+    t.deepEqual(parsed, {
+        tagName: 'img',
+        props: {
+            src: 'a.jpg',
+            onerror: "this.src='b.jpg'"
+        },
+        children: [],
+        key: undefined,
+        count: 0,
+    });
+
+    html = '<div id="mydiv"><img src="a.jpg" onerror="this.src=\'//coupang.com/b.jpg\'"></div>';
+    parsed = tvdom.parse(html);
+    t.deepEqual(parsed, {
+        tagName: 'div',
+        props: {
+            id: 'mydiv'
+        },
+        children: [{
+            tagName: 'img',
+            props: {
+                src: 'a.jpg',
+                onerror: "this.src='//coupang.com/b.jpg'"
+            },
+            children: [],
+            key: undefined,
+            count: 0
+        }],
+        key: undefined,
+        count: 1,
+    });
+
+
+
+    t.end();
+});
+
+
+test('test non attribute value', function (t) {
+    var html = '<button onclick="callback()" type="checkbox" checked />';
+    var parsed = tvdom.parse(html);
+    t.deepEqual(parsed, {
+        tagName: 'button',
+        props: {
+            onclick: 'callback()',
+            type: "checkbox",
+            checked: true
+        },
+        children: [],
+        key: undefined,
+        count: 0,
+    });
+
+
+    t.end();
+});
+
+test('test blank char on assign left or right', function (t) {
+    var html = '<button onclick ="callback()" type= "checkbox" custom = 123 checked/>';
+    var parsed = tvdom.parse(html);
+    t.deepEqual(parsed, {
+        tagName: 'button',
+        props: {
+            onclick: 'callback()',
+            type: "checkbox",
+            checked: true,
+            custom: '123'
+        },
+        children: [],
+        key: undefined,
+        count: 0,
+    });
+
+
+    t.end();
+});
+

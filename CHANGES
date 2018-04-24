@@ -1,3 +1,8 @@
+0.1.7
+=====
+1. support nest quotation on attribute value
+2. support blank char on assign '=' left and right
+
 0.1.6
 =====
 unescape special chars in attribute value (include handlebars escaped chars)
