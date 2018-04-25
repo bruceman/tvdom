@@ -1,6 +1,6 @@
 {
   "name": "tvdom",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A simple and fast tiny vdom tool",
   "keywords": [
     "tvdom",
@@ -41,7 +41,6 @@
     "uglify-es": "^3.2.2"
   },
   "dependencies": {
-    "list-diff2": "^0.1.4",
-    "source-component": "^1.2.1"
+    "list-diff2": "^0.1.4"
   }
 }
